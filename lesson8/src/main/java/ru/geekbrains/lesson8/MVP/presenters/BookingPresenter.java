@@ -35,9 +35,19 @@ public class BookingPresenter implements ViewObserver {
         view.printReservationTableResult(reservationNo);
     }
 
+    protected void printEditReservationTableResult(int[] reservationNo){
+        view.printEditReservationTableResult(reservationNo);
+    }
+
     @Override
     public void onReservationTable(Date reservationDate, int tableNo, String name) {
         int reservationNo = model.reservationTable(reservationDate, tableNo, name);
         printReservationTableResult(reservationNo);
+    }
+
+    @Override
+    public void onEditReservationTable(int oldReservation, Date reservationDate, int tableNo, String name) {
+        int[] reservationNo = model.editReservationTable(oldReservation, reservationDate, tableNo, name);
+        printEditReservationTableResult(reservationNo);
     }
 }

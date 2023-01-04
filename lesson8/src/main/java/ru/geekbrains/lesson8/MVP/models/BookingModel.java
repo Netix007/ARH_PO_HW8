@@ -2,10 +2,7 @@ package ru.geekbrains.lesson8.MVP.models;
 
 import ru.geekbrains.lesson8.MVP.presenters.Model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 public class BookingModel implements Model {
 
@@ -44,5 +41,23 @@ public class BookingModel implements Model {
         throw new RuntimeException("Некорректный номер столика.");
     }
 
+    @Override
+    public int[] editReservationTable(int oldReservation, Date reservationDate, int tableNo, String name) {
+        int[] result = new int[2];
+        for (Table el : loadTables()
+        ) {
+            Iterator<Reservation> i = el.getReservations().iterator();
+            while (i.hasNext()) {
+                Reservation e = i.next();
+                if (e.getId() == oldReservation) {
+                    i.remove();
+                    result[0] = oldReservation;
+                    result[1] = reservationTable(reservationDate, tableNo, name);
+                    return result;
+                }
+            }
+        }
+        throw new RuntimeException("Некорректный номер брони.");
+    }
 
 }

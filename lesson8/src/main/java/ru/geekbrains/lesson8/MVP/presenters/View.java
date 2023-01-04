@@ -10,4 +10,6 @@ public interface View {
     void setObserver(ViewObserver observer);
     void printReservationTableResult(int reservationNo);
 
+    void printEditReservationTableResult(int[] reservationNo);
+
 }
